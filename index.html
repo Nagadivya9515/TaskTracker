@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simple Task Tracker</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+    h2 { margin-top: 30px; }
+    .task-section, .note-section {
+      background: #fff;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    input, textarea, select, button {
+      margin-top: 5px;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    ul { list-style: none; padding: 0; }
+    li { padding: 6px 0; }
+    .completed { text-decoration: line-through; }
+    .time, .date { font-size: 0.85rem; color: #666; }
+    .badge {
+      display: inline-block;
+      padding: 2px 6px;
+      font-size: 0.75rem;
+      border-radius: 4px;
+      margin-left: 8px;
+      color: #fff;
+    }
+    .badge.work { background-color: #007acc; }
+    .badge.personal { background-color: #28a745; }
+    .badge.urgent { background-color: #dc3545; }
+    textarea { width: 90%; height: 100px; }
+    .note { background: #f9f9f9; padding: 10px; border-left: 4px solid #007acc; margin-top: 10px; }
+    .note time { font-size: 0.75rem; color: #888; display: block; }
+    .note-content { white-space: pre-wrap;line-height: 1.6;}
+    .note-content.collapsed { max-height: 60px;overflow: hidden;position: relative; }
+    .note-toggle { color: blue;cursor: pointer;display: inline-block;margin-top: 5px; }
+
+  </style>
+</head>
+<body>
+  <h1>📋 Task Tracker</h1>
+
+  <div class="task-section">
+    <h2>Planned Tasks</h2>
+    <input type="text" id="plannedInput" placeholder="Add planned task..." />
+    <select id="plannedCategory">
+      <option value="work">Work</option>
+      <option value="personal">Personal</option>
+      <option value="urgent">Urgent</option>
+    </select>
+    <input type="date" id="plannedDate" />
+    <input type="time" id="plannedTime" />
+    <button onclick="addPlannedTask()">Add</button>
+    <ul id="plannedList"></ul>
+    <button onclick="exportPlans()">📤 Export Plans</button>
+  </div>
+
+  <div class="task-section">
+    <h2>Checklist Tasks</h2>
+    <input type="text" id="checklistInput" placeholder="Add checklist item..." />
+    <input type="date" id="checklistDate" />
+    <button onclick="addChecklistTask()">Add</button>
+    <ul id="checklistList"></ul>
+  </div>
+
+  <div class="task-section">
+    <h2>Timer Tasks</h2>
+    <input type="text" id="timerInput" placeholder="Add timer task..." />
+    <input type="date" id="timerDate" />
+    <button onclick="addTimerTask()">Add</button>
+    <ul id="timerList"></ul>
+  </div>
+
+  <div class="task-section">
+    <h2>Repeat Alarm Tasks</h2>
+    <input type="text" id="alarmInput" placeholder="E.g., Drink water" />
+    <input type="number" id="alarmInterval" placeholder="Interval in mins" />
+    <button onclick="addAlarmTask()">Set Alarm</button>
+    <ul id="alarmList"></ul>
+  </div>
+
+  <audio id="alarmSound" src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg" preload="auto"></audio>
+
+  <div class="note-section">
+    <h2>📝 Notepad</h2>
+    <textarea id="noteInput" placeholder="Write your note here... (use ** for bold text)"></textarea><br>
+    <button onclick="addNote()">Add Note</button>
+    <button id="undoMessage"style="display:none;"></button>
+    <button onclick="exportNotes()">📤 Export Notes</button>
+    <ul id="noteList"></ul>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+</html>
