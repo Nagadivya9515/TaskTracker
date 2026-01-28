@@ -472,6 +472,6 @@ app.delete("/delete-note/:id", authorize, async (req, res) => {
 
 // no seperate routes since all controllers are in this file
 
-app.listen(4000, () => {
+app.listen(4000, "0.0.0.0", () => {
     console.log("Server is running on port 4000");
 })
