@@ -5,6 +5,7 @@ import {useLoading} from "../context/LoadingContext";
 import Loader from "./Loader";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import api from '../api';
 
 export default function Login() {
 
@@ -40,7 +41,7 @@ export default function Login() {
 
         try {
             setLoading(true);
-            const response = await axios.post("http://localhost:4000/login", { email, password });
+            const response = await axios.post("/login", { email, password });
 
             console.log(response.data);
 

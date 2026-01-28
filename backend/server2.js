@@ -8,7 +8,9 @@ import nodemailer from "nodemailer";
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: "https://tubular-pony-1cd532.netlify.app",
+}));
 
 // Database connection
 mongoose.connect("mongodb+srv://ynagadivya36_db_user:Naga%405678@cluster0.i1v24ex.mongodb.net/TasktrackerDB").then(() => {
